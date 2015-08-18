@@ -35,6 +35,7 @@ Keys you should know
 
 * F2 Open/close Nerdtree
 * F3 Open/close Tagbar
+* F4 Toggle auto highlight word under cursor
 * F12 Switch cursor modes
 * h, j, k, l Since arrow keys won't work
 
