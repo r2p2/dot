@@ -1,7 +1,6 @@
 syntax enable
-set t_Co=16
 set background=dark
-colorscheme solarized
+colorscheme Monokai
 
-hi Search cterm=NONE ctermfg=white ctermbg=darkgreen
-hi Search guifg=white guibg=darkgreen
+hi Search cterm=NONE ctermfg=black ctermbg=lightgray
+hi Search guibg=peru guifg=wheat
