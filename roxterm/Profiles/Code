@@ -1,5 +1,5 @@
 [roxterm profile]
-colour_scheme=solaized-dark
+colour_scheme=Monokai
 font=DejaVu Sans Mono 10
 audible_bell=0
 scrollback_lines=90000
