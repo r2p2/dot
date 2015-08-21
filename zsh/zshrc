@@ -1,0 +1,10 @@
+export ZSH=$HOME/dot/zsh/oh-my-zsh
+ZSH_THEME="r2p2"
+DISABLE_AUTO_UPDATE="true"
+ENABLE_CORRECTION="true"
+COMPLETION_WAITING_DOTS="true"
+HIST_STAMPS="yyyy-mm-dd"
+ZSH_CUSTOM=$HOME/dot/zsh/custom
+plugins=(git battery colored-man vi-mode)
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+source $ZSH/oh-my-zsh.sh
