@@ -9,7 +9,7 @@ fi
 
 if [ -f ~/.zshrc ]; then
 	echo "Create backup of ~/.zshrc"
-	mv ~/.vimrc ~/zshrc_backup_$DATE
+	mv ~/.zshrc ~/zshrc_backup_$DATE
 fi
 
 ln -s ~/dot/zsh/zshrc ~/.zshrc
