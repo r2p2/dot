@@ -1,6 +1,6 @@
 [roxterm profile]
 colour_scheme=r2p2
-font=DejaVu Sans Mono 10
+font=Inconsolata Medium 13
 audible_bell=0
 scrollback_lines=90000
 scroll_on_keystroke=1
