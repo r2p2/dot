@@ -10,6 +10,8 @@ require("naughty")
 -- Load Debian menu entries
 require("debian.menu")
 
+vicious = require("vicious")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -99,10 +101,7 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
                                      menu = mymainmenu })
 -- }}}
 
--- {{{ Wibox
--- Create a textclock widget
-mytextclock = awful.widget.textclock({ align = "right" })
-
+-- {{{ Wibo
 -- Create a systray
 mysystray = widget({ type = "systray" })
 
@@ -151,6 +150,140 @@ mytasklist.buttons = awful.util.table.join(
                                               if client.focus then client.focus:raise() end
                                           end))
 
+-- Battery ---------------------------------------------------------------------
+batwidget = awful.widget.progressbar()
+batwidget:set_width(10)
+batwidget:set_vertical(true)
+batwidget:set_background_color("#000000")
+batwidget:set_border_color(nil)
+batwidget:set_color("#00bfff")
+batwidget:set_gradient_colors({ "#FF0000", "#FFFF00", "#00FF00" })
+batwidget_t = awful.tooltip({ objects = { batwidget.widget } })
+vicious.cache(vicious.widgets.bat)
+vicious.register(batwidget, vicious.widgets.bat,
+		function (widget, args)
+			batwidget_t:set_text(' State: ' .. args[1] .. ' ' .. args[2] .. '%\n Time left: ' .. args[3] .. ' ')
+			return args[2]
+		end, 120, "BAT0")
+--------------------------------------------------------------------------------
+
+-- Date ------------------------------------------------------------------------
+datewidget = widget({ type = "textbox" })
+vicious.register(datewidget, vicious.widgets.date, "%b %d, %R", 60)
+--------------------------------------------------------------------------------
+
+-- RAM usage -------------------------------------------------------------------
+memwidget = awful.widget.progressbar()
+memwidget:set_width(10)
+memwidget:set_vertical(true)
+memwidget:set_background_color("#494B4F")
+memwidget:set_border_color(nil)
+memwidget:set_color("#AECF96")
+memwidget:set_gradient_colors({ "#AECF96", "#88A175", "#FF5656" })
+memwidget_t = awful.tooltip({ objects = { memwidget.widget } })
+vicious.cache(vicious.widgets.mem)
+
+vicious.register(memwidget, vicious.widgets.mem,
+		function (widget, args)
+			memwidget_t:set_text(" RAM: " .. args[2] .. "MB/" .. args[3] .. "MB " )
+			return args[1]
+		end, 13)
+--------------------------------------------------------------------------------
+
+-- CPU usage -------------------------------------------------------------------
+cpuwidget = awful.widget.graph()
+cpuwidget:set_width(50)
+cpuwidget:set_background_color("#494B4F")
+cpuwidget:set_color("#FF5656")
+cpuwidget:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
+cpuwidget_t = awful.tooltip({ objects = { cpuwidget.widget },})
+
+vicious.register(cpuwidget, vicious.widgets.cpu,
+		function (widget, args)
+			local str = ' CPU usage: ' .. args[1] .. '% '
+			for i, value in ipairs(args) do
+				if i == 1 then
+				else
+					str = str .. '\n CPU #' .. (i-1) .. ': ' .. value .. '% '
+				end
+			end
+			cpuwidget_t:set_text(str)
+			return args[1]
+		end)
+--------------------------------------------------------------------------------
+
+-- PKG widget ------------------------------------------------------------------
+pkgwidget = widget({ type = "textbox" })
+vicious.register(pkgwidget, vicious.widgets.pkg,
+		function (widget, args)
+			return "APT: " .. args[1]
+		end, 1600, "Ubuntu")
+--------------------------------------------------------------------------------
+
+-- Keyboard widget -------------------------------------------------------------
+kbdcfg = {}
+kbdcfg.cmd = "setxkbmap"
+
+--list your own keyboard layouts here
+kbdcfg.layout = { }
+
+function split(str, delim)
+    local result,pat,lastPos = {}, "(.-)" .. delim .. "()", 1
+    for part, pos in string.gfind(str, pat) do
+		naughty.notify({text=result})
+        table.insert(result, part); lastPos = pos
+    end
+    table.insert(result, string.sub(str, lastPos))
+    return result
+end
+
+kbdcfg_layouts_file = io.open(awful.util.getdir('config') .. '/config/' .. 'keyboard_layouts', 'r')
+for line in kbdcfg_layouts_file:lines() do
+	table.insert(kbdcfg.layout, line)
+end
+kbdcfg_layouts_file:close();
+
+if table.getn(kbdcfg.layout) > 0 then
+	kbdcfg.current = 1
+	kbdcfg.widget = widget({ type = "textbox", align = "right" })
+	kbdcfg.widget.text = " " .. kbdcfg.layout[kbdcfg.current] .. " "
+	kbdcfg.switch = function ()
+		kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
+		local t = " " .. kbdcfg.layout[kbdcfg.current] .. " "
+		kbdcfg.widget.text = t
+		os.execute( kbdcfg.cmd .. t )
+	end
+
+	kbdcfg.widget:buttons(awful.util.table.join(
+		awful.button({ }, 1, function () kbdcfg.switch() end)
+	))
+end
+--------------------------------------------------------------------------------
+
+-- Weather widget --------------------------------------------------------------
+weather_location_file = io.open(awful.util.getdir('config') .. '/config/' .. 'weather_location', 'r')
+weather_location = weather_location_file:read();
+weather_location_file:close();
+
+weatherwidget = widget({ type = "textbox" })
+weather_t = awful.tooltip({ objects = { weatherwidget },})
+
+vicious.register(weatherwidget, vicious.widgets.weather,
+                function (widget, args)
+                    weather_t:set_text("City: " .. args["{city}"] .."\n" ..
+							"Wind: " .. args["{windkmh}"] .. "km/h " .. args["{wind}"] .. "\n" ..
+							"Sky: " .. args["{sky}"] .. "\n" ..
+							"Humidity: " .. args["{humid}"] .. "%\n" ..
+							"Pressure: " .. args["{press}"])
+                    return args["{tempc}"] .. "°C"
+                end, 1800, weather_location)
+                --'1800': check every 30 minutes.
+                --'CYUL': the Montreal ICAO code.
+--------------------------------------------------------------------------------
+
+myseparator = widget({ type = "textbox", name = "myseparator", align = "right" })
+myseparator.text = " | "
+
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
@@ -180,11 +313,26 @@ for s = 1, screen.count() do
             mypromptbox[s],
             layout = awful.widget.layout.horizontal.leftright
         },
-        mylayoutbox[s],
-        mytextclock,
-        s == 1 and mysystray or nil,
+		mylayoutbox[s],
+		myseparator,
+		datewidget,
+		myseparator,
+		batwidget.widget,
+		myseparator,
+		memwidget.widget,
+		myseparator,
+		cpuwidget.widget,
+		myseparator,
+		pkgwidget.widget,
+		table.getn(kbdcfg.layout) > 0 and myseparator or nil,
+		table.getn(kbdcfg.layout) > 0 and kbdcfg.widget or nil,
+		myseparator,
+		weatherwidget,
+		myseparator,
+		s == 1 and mysystray or nil,
+		s == 1 and myseparator or nil,
         mytasklist[s],
-        layout = awful.widget.layout.horizontal.rightleft
+		layout = awful.widget.layout.horizontal.rightleft
     }
 end
 -- }}}
