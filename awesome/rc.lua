@@ -55,6 +55,47 @@ editor_cmd = terminal .. " -e " .. editor
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
+function get_conky()
+    local clients = client.get()
+    local conky = nil
+    local i = 1
+    while clients[i]
+    do
+        if clients[i].class == "Conky"
+        then
+            conky = clients[i]
+        end
+        i = i + 1
+    end
+    return conky
+end
+function raise_conky()
+    local conky = get_conky()
+    if conky
+    then
+        conky.ontop = true
+    end
+end
+function lower_conky()
+    local conky = get_conky()
+    if conky
+    then
+        conky.ontop = false
+    end
+end
+function toggle_conky()
+    local conky = get_conky()
+    if conky
+    then
+        if conky.ontop
+        then
+            conky.ontop = false
+        else
+            conky.ontop = true
+        end
+    end
+end
+
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
@@ -402,7 +443,11 @@ globalkeys = awful.util.table.join(
                   mypromptbox[mouse.screen].widget,
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
-              end)
+              end),
+
+    -- Conky
+	awful.key({}, "F10", function() raise_conky() end, function() lower_conky() end),
+	awful.key({}, "Pause", function() toggle_conky() end)
 )
 
 clientkeys = awful.util.table.join(
@@ -492,7 +537,16 @@ awful.rules.rules = {
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
+	{ rule = { class = "Conky" },
+		properties = {
+		  floating = true,
+		  sticky = true,
+		  ontop = false,
+		  focusable = false,
+		  size_hints = {"program_position", "program_size"}
+	} },
 }
+
 -- }}}
 
 -- {{{ Signals
@@ -525,3 +579,22 @@ end)
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+function run_once(prg, arg_string, pname, screen)
+    if not prg then
+        do return nil end
+    end
+
+    if not pname then
+       pname = prg
+    end
+
+    if not arg_string then
+        awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. "' || (" .. prg .. ")",screen)
+    else
+        awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. " ".. arg_string .."' || (" .. prg .. " " .. arg_string .. ")",screen)
+    end
+end
+
+run_once("xcompmgr")
+run_once("conky")
