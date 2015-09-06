@@ -192,6 +192,10 @@ mytasklist.buttons = awful.util.table.join(
                                           end))
 
 -- Battery ---------------------------------------------------------------------
+bat_file = io.open(awful.util.getdir('config') .. '/config/' .. 'battery', 'r')
+bat = bat_file:read();
+bat_file:close();
+
 batwidget = awful.widget.progressbar()
 batwidget:set_width(10)
 batwidget:set_vertical(true)
@@ -205,7 +209,7 @@ vicious.register(batwidget, vicious.widgets.bat,
 		function (widget, args)
 			batwidget_t:set_text(' State: ' .. args[1] .. ' ' .. args[2] .. '%\n Time left: ' .. args[3] .. ' ')
 			return args[2]
-		end, 120, "BAT0")
+		end, 120, bat)
 --------------------------------------------------------------------------------
 
 -- Date ------------------------------------------------------------------------
