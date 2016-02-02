@@ -4,13 +4,11 @@
 
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
 
+call plug#begin('~/.vim/plugged') " :PlugInstall
 exe 'source' '~/.vim/plugins.vim'
+call plug#end()
 
-call vundle#end()
 filetype plugin indent on
 
 for fpath in split(globpath('~/.vim/plugin_config', '*.vim'), '\n')
@@ -20,3 +18,4 @@ endfor
 for fpath in split(globpath('~/.vim/my_config', '*.vim'), '\n')
 	exe 'source' fpath
 endfor
+

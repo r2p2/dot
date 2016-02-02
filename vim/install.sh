@@ -25,4 +25,4 @@ fi
 ln -s ~/dot/vim ~/.vim
 ln -s ~/dot/vim/vimrc ~/.vimrc
 
-vim -c PluginInstall -c quitall
+vim -c PlugInstall -c quitall
