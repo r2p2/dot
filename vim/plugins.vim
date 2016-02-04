@@ -29,10 +29,10 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'tpope/vim-fugitive'
 
 " style support for markdown language
-Plug 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 
 " use ack or ag out of vim
-Plug 'mileszs/ack.vim'
+Plug 'mileszs/ack.vim', {'on': 'Ack'}
 
 " format by pattern
 Plug 'godlygeek/tabular'
@@ -44,7 +44,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdcommenter'
 
 " add doxy comments in the code
-Plug 'vim-scripts/DoxygenToolkit.vim'
+Plug 'vim-scripts/DoxygenToolkit.vim', {'on': ['Dox', 'DoxAuthor', 'DoxBlock', 'DoxLic', 'DoxUndoc']}
 
 " add rust support
 Plug 'rust-lang/rust.vim', {'for': 'rust'}
