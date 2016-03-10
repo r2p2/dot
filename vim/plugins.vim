@@ -48,3 +48,6 @@ Plug 'vim-scripts/DoxygenToolkit.vim', {'on': ['Dox', 'DoxAuthor', 'DoxBlock', '
 
 " add rust support
 Plug 'rust-lang/rust.vim', {'for': 'rust'}
+
+" add organizer
+Plug 'vimoutliner/vimoutliner', {'for': 'votl'}
