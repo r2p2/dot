@@ -10,6 +10,8 @@ set incsearch
 set history=1000
 set undolevels=1000
 set wildignore=*.swp,*.bak,*.pyc,*.class,*.o
+let &showbreak='    ↪    '
+set wrap
 set title
 set visualbell
 set nobackup
