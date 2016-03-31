@@ -1,6 +1,13 @@
 Vim Setup
 =========
 
+Requirements
+------------
+
+- ag
+
+	For performance reasonst, CTRL-P is configured to use ag.
+
 Install
 -------
 
@@ -32,10 +39,12 @@ forcefully but you need to be aware, that you might loose data if you do so.
 
 Keys you should know
 --------------------
-
+* <leader> is ','
 * F2 Open/close Nerdtree
 * F3 Open/close Tagbar
 * F4 Toggle auto highlight word under cursor
+* F5 Toggle between absolute and relative line numbering
 * F12 Switch cursor modes
 * h, j, k, l Since arrow keys won't work
+* ,ss Toggle spell checking
 
