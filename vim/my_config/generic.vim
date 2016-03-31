@@ -1,4 +1,4 @@
-let mapleader="-"
+let mapleader=","
 set mouse=a
 set number
 set showmatch
