@@ -8,6 +8,10 @@ Requirements
 
 	For performance reasonst, CTRL-P is configured to use ag.
 
+- Vim with Python support 2.7 or any 3
+
+	I wanted to use SnipMate but that seems not to work very well with tabs.
+
 Install
 -------
 

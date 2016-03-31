@@ -51,3 +51,13 @@ Plug 'rust-lang/rust.vim', {'for': 'rust'}
 
 " add organizer
 Plug 'vimoutliner/vimoutliner', {'for': 'votl'}
+
+" Snippet Engine
+Plug 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
+
+" Undo history
+Plug 'sjl/gundo.vim'
+
