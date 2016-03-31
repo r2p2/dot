@@ -5,3 +5,6 @@
 " ctrl - s in a horizontal split
 
 let g:ctrlp_custom_ignore = 'moc_|ui_'
+
+" as long as ag is installed, this cmd makes ctrlp utterly fast
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
