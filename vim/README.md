@@ -6,7 +6,7 @@ Requirements
 
 - ag
 
-	For performance reasonst, CTRL-P is configured to use ag.
+	For performance reasons, CTRL-P is configured to use ag.
 
 - Vim with Python support 2.7 or any 3
 
@@ -43,7 +43,7 @@ forcefully but you need to be aware, that you might loose data if you do so.
 
 Keys you should know
 --------------------
-* <leader> is ','
+* leader is ','
 * F2 Open/close Nerdtree
 * F3 Open/close Tagbar
 * F4 Toggle auto highlight word under cursor
@@ -52,6 +52,8 @@ Keys you should know
 * h, j, k, l Since arrow keys won't work
 * ,ss Toggle spell checking
 
-Nothing knew, but good to know
+Nothing new, but good to know
+-----------------------------
+
 * If the spell checker doesn't know a word, add it with 'zg'
 
