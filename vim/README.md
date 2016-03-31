@@ -28,7 +28,7 @@ Update Plugins
 --------------
 
 From time to time newer versions of plugins will be released. To stay up to
-date, yust execute the update.sh script inside this directory.
+date, just execute the update.sh script inside this directory.
 
 	./update.sh
 
@@ -51,4 +51,7 @@ Keys you should know
 * F12 Switch cursor modes
 * h, j, k, l Since arrow keys won't work
 * ,ss Toggle spell checking
+
+Nothing knew, but good to know
+* If the spell checker doesn't know a word, add it with 'zg'
 
