@@ -11,11 +11,11 @@ call plug#end()
 
 filetype plugin indent on
 
-for fpath in split(globpath('~/.vim/plugin_config', '*.vim'), '\n')
+for fpath in split(globpath('~/.vim/my_config', '*.vim'), '\n')
 	exe 'source' fpath
 endfor
 
-for fpath in split(globpath('~/.vim/my_config', '*.vim'), '\n')
+for fpath in split(globpath('~/.vim/plugin_config', '*.vim'), '\n')
 	exe 'source' fpath
 endfor
 
