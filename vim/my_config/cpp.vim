@@ -1,9 +1,4 @@
-function! SetupCppEnvironment()
-	if (&ft == 'cpp')
-		setlocal textwidth=80
-	endif
-endfunction
-
 augroup cppacgroup
-	autocmd BufReadPost,BufNewFile * call SetupCppEnvironment()
+	autocmd FileType cpp setlocal textwidth=80
 augroup END
+
