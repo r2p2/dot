@@ -51,6 +51,8 @@ Keys you should know
 * F12 Switch cursor modes
 * h, j, k, l Since arrow keys won't work
 * ,ss Toggle spell checking
+* ,u Toggle Gundo
+* + and - to resize windows horizontally
 
 Nothing new, but good to know
 -----------------------------
