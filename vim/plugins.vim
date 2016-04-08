@@ -61,3 +61,5 @@ Plug 'honza/vim-snippets'
 " Undo history
 Plug 'sjl/gundo.vim'
 
+Plug 'Rip-Rip/clang_complete', {'for': 'cpp'}
+
