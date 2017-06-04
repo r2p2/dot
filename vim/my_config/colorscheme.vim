@@ -5,9 +5,15 @@ if !has("gui_running")
 	set t_Co=256
 endif
 
+if empty($TMUX)
+	if has("nvim")
+		let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+	endif
+	if has("termguicolors")
+		set termguicolors
+	endif
+endif
+
 syntax enable
 set background=dark
-colorscheme Monokai
-
-hi Search cterm=NONE ctermfg=black ctermbg=lightgray
-hi Search guibg=peru guifg=wheat
+colorscheme one

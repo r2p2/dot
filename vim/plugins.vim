@@ -63,3 +63,6 @@ Plug 'sjl/gundo.vim'
 
 " Enhanced go support
 Plug 'fatih/vim-go'
+
+" Color Scheme
+Plug 'rakr/vim-one'
