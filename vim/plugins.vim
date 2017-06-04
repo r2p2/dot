@@ -61,3 +61,5 @@ Plug 'honza/vim-snippets'
 " Undo history
 Plug 'sjl/gundo.vim'
 
+" Enhanced go support
+Plug 'fatih/vim-go'
