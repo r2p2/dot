@@ -63,3 +63,6 @@ Plug 'fatih/vim-go'
 
 " Color Scheme
 Plug 'rakr/vim-one'
+
+" Vim completion for c++
+Plug 'Rip-Rip/clang_complete', {'for': 'cpp'}
