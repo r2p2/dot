@@ -16,4 +16,5 @@ endif
 
 syntax enable
 set background=dark
-colorscheme one
+let g:gruvbox_italic=1
+colorscheme gruvbox
