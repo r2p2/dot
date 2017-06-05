@@ -37,9 +37,6 @@ Plug 'mileszs/ack.vim', {'on': 'Ack'}
 " format by pattern
 Plug 'godlygeek/tabular'
 
-" edit on multiple locations at the same time
-Plug 'terryma/vim-multiple-cursors'
-
 " comment faster
 Plug 'scrooloose/nerdcommenter'
 
