@@ -23,7 +23,7 @@ Plug 'mhinz/vim-signify'
 Plug 'nvie/vim-togglemouse'
 
 " colorize parentheses
-Plug 'kien/rainbow_parentheses.vim'
+Plug 'luochen1990/rainbow'
 
 " git support
 Plug 'tpope/vim-fugitive'
