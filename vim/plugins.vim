@@ -2,7 +2,7 @@
 Plug 'bling/vim-airline'
 
 " show errors in your code
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
 
 " fuzzy file accessor
 Plug 'kien/ctrlp.vim'
@@ -63,3 +63,11 @@ Plug 'fatih/vim-go'
 
 " Color Scheme
 Plug 'rakr/vim-one'
+
+Plug 'rhysd/vim-clang-format'
+
+Plug 'junegunn/goyo.vim'
+
+"Plug 'neomake/neomake'
+
+Plug 'w0rp/ale'

@@ -1,6 +1,6 @@
 let mapleader=","
 set mouse=a
-set number
+set nonumber
 set showmatch
 set hidden
 set nowrap
@@ -24,4 +24,5 @@ set display+=lastline
 set nrformats-=octal
 set viminfo='10,\"100,:20,n~/.viminfo
 set listchars=tab:▸\ ,eol:¬
+set guicursor=
 autocmd filetype html,xml set listchars-=tab:>.
